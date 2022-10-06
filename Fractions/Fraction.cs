@@ -4,6 +4,7 @@ public class Fraction
 {
     public int Numerator { get; set; } = 0;
     public int Denominator { get; set; } = 1;
+    public double decimalFraction { get; set; } = 0;
 
     public Fraction(int numerator, int denominator)
     {
@@ -11,6 +12,7 @@ public class Fraction
 
         if (Denominator > 0) {
             Denominator = denominator;
+            decimalFraction = (double)Numerator / (double)Denominator;
         }
         else {
             throw new ArgumentOutOfRangeException();
@@ -86,31 +88,47 @@ public class Fraction
         return new Fraction(input.Numerator, input.Denominator);
     }
 
-
-    public bool GreaterThan(Fraction fraction)
+    public bool GreaterThan(Fraction input)
     {
+        double secondFraction = ToDouble(input);
 
-        return true;
+        if (decimalFraction > secondFraction) {
+            return true;
+        }
+        return false;
     }
 
-    public bool LesserThan(Fraction fraction)
+    public bool LesserThan(Fraction input)
     {
-        return true;
+        double inputFraction = ToDouble(input);
+
+        if (decimalFraction < inputFraction) {
+            return true;
+        }
+        return false;
     }
 
+    public bool Equals(Fraction input)
+    {
+        double inputFraction = ToDouble(input);
 
-    //public override bool Equals(Fraction fraction)
-    //{
-    //    return base.Equals(fraction.Numerator / fraction.Denominator);
-    //}
+        if (decimalFraction == inputFraction) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public double ToDouble(Fraction input)
+    {
+        return (double)input.Numerator / (double)input.Denominator;
+    }
 
     public override string ToString()
     {
         return "Numerator: " + Numerator + "\n" + "Denominator: " + Denominator + "\n";
     }
 
-
-    //Properties
 
 
 }
