@@ -167,10 +167,19 @@ public class Fraction
         return (Fraction1.Equals(Fraction2) || Fraction1.GreaterThan(Fraction2));
     }
 
+    public override bool Equals(object? obj)
+    {
+        if (obj is Fraction fraction) {
+            return Equals(fraction);
+        } else {
+            return false;
+        }
+    }
+
 
     public override string ToString()
     {
-        return "Numerator: " + Numerator + "\n" + "Denominator: " + Denominator + "\n";
+        return Numerator + "/" + Denominator + "\n";
     }
 
 

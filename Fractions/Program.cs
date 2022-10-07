@@ -33,6 +33,12 @@
             Fraction fraction8 = new Fraction(1, 1);
 
             Console.WriteLine("Is lesser: " + fraction7.LesserThan(fraction8));
+
+
+            Fraction f1 = new Fraction(1, 2);
+            Fraction f2 = new Fraction(1, 2);
+            Fraction result = f1 + f2;
+            Console.WriteLine("Result: " + result);
         }
     }
 }
