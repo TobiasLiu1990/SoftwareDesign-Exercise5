@@ -7,6 +7,8 @@
             Fraction fraction = new Fraction(1, 2);
             Fraction fraction2 = new Fraction(2, 3);
 
+            fraction.ToDouble();
+
             Console.WriteLine("Multiply: " + fraction.Multiplication(fraction2));
             Console.WriteLine("Add: " + fraction.Addition(fraction2));
             Console.WriteLine("Subtract: " + fraction.Subtraction(fraction2));

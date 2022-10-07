@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Data.Common;
 
 public class Fraction
 {
     public int Numerator { get; set; } = 0;
     public int Denominator { get; set; } = 1;
-    public double decimalFraction { get; set; } = 0;
 
     public Fraction(int numerator, int denominator)
     {
@@ -12,7 +12,6 @@ public class Fraction
 
         if (Denominator > 0) {
             Denominator = denominator;
-            decimalFraction = (double)Numerator / (double)Denominator;
         }
         else {
             throw new ArgumentOutOfRangeException();
@@ -90,9 +89,7 @@ public class Fraction
 
     public bool GreaterThan(Fraction input)
     {
-        double secondFraction = ToDouble(input);
-
-        if (decimalFraction > secondFraction) {
+        if (this.ToDouble() > input.ToDouble()) {
             return true;
         }
         return false;
@@ -100,9 +97,7 @@ public class Fraction
 
     public bool LesserThan(Fraction input)
     {
-        double inputFraction = ToDouble(input);
-
-        if (decimalFraction < inputFraction) {
+        if (this.ToDouble() < input.ToDouble()) {
             return true;
         }
         return false;
@@ -110,19 +105,68 @@ public class Fraction
 
     public bool Equals(Fraction input)
     {
-        double inputFraction = ToDouble(input);
-
-        if (decimalFraction == inputFraction) {
+        if (this.ToDouble() == input.ToDouble()) {
             return true;
         } else {
             return false;
         }
     }
 
-    public double ToDouble(Fraction input)
+    public double ToDouble()
     {
-        return (double)input.Numerator / (double)input.Denominator;
+        return (double)Numerator / (double)Denominator;
     }
+
+    public static Fraction operator -(Fraction Fraction1, Fraction Fraction2)
+    {
+        return Fraction1.Subtraction(Fraction2);
+    }
+
+    public static Fraction operator +(Fraction Fraction1, Fraction Fraction2)
+    {
+        return Fraction1.Addition(Fraction2);
+    }
+
+    public static Fraction operator *(Fraction Fraction1, Fraction Fraction2)
+    {
+        return Fraction1.Multiplication(Fraction2);
+    }
+
+    public static Fraction operator /(Fraction Fraction1, Fraction Fraction2)
+    {
+        return Fraction1.Division(Fraction2);
+    }
+
+    public static bool operator ==(Fraction Fraction1, Fraction Fraction2)
+    {
+        return Fraction1.Equals(Fraction2);
+    }
+
+    public static bool operator !=(Fraction Fraction1, Fraction Fraction2)
+    {
+        return !Fraction1.Equals(Fraction2);
+    }
+
+    public static bool operator <(Fraction Fraction1, Fraction Fraction2)
+    {
+        return Fraction1.LesserThan(Fraction2);
+    }
+
+    public static bool operator >(Fraction Fraction1, Fraction Fraction2)
+    {
+        return Fraction1.GreaterThan(Fraction2);
+    }
+
+    public static bool operator <=(Fraction Fraction1, Fraction Fraction2)
+    {
+        return (Fraction1.Equals(Fraction2) || Fraction1.LesserThan(Fraction2));
+    }
+
+    public static bool operator >=(Fraction Fraction1, Fraction Fraction2)
+    {
+        return (Fraction1.Equals(Fraction2) || Fraction1.GreaterThan(Fraction2));
+    }
+
 
     public override string ToString()
     {
